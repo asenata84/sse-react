@@ -24,7 +24,7 @@ const App = () => {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <div>
-          Message <span className="App-link">{message}</span>
+          Message <span className="message">{message}</span>
         </div>
       </header>
     </div>
