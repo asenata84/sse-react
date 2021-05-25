@@ -10,10 +10,12 @@ let SSE = createEventSource();
 
 const App = () => {
   const [message, setMessage] = useState(null);
+  const [myMessage, setMyMessage] = useState(null);
   const [events, setEvents] = useState(SSE);
   const [listening, setListening] = useState(false);
 
   const logoClasses = ["App-logo"];
+
   if (listening) {
     logoClasses.push("spinning");
   }
@@ -37,6 +39,11 @@ const App = () => {
       setListening(true);
     };
 
+    events.addEventListener("myEvent", (e) => {
+      setMyMessage(JSON.parse(e.data));
+      setListening(true);
+    });
+
     events.onerror = () => {
       // events.close();
       setListening(false);
@@ -51,6 +58,9 @@ const App = () => {
         <img src={logo} className={logoClasses.join(" ")} alt="logo" />
         <div>
           Message: <span className="message">{message}</span>
+        </div>
+        <div>
+          My Message: <span className="message">{myMessage}</span>
         </div>
         <br />
         <div className="container">
